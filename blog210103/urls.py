@@ -15,15 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.shortcuts import render
 # from django.urls import path
-
-
-
 import xadmin
+
+def index(request):
+    return render(request,'index.html')
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     url(r'^xadmin/', xadmin.site.urls),
-
+    url(r'^$', index, name='index'),
+    url(r'^$', index, name='user_login'),
+    url(r'^$', index, name='user_center'),
+    url(r'^$', index, name='user_logout'),
+    url(r'^$', index, name='user_register'),
+    url(r'^$', index, name='search'),
     # url(r'^$',index(sitemaps))
 ]
