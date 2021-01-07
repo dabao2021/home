@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from datetime import datetime
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import render
@@ -20,7 +22,12 @@ from django.shortcuts import render
 import xadmin
 
 def index(request):
-    return render(request,'index.html')
+    category = [{'name': 'python'},{'name':'git'},{'name': 'django'}]
+    # print('1111111111',datetime.now())
+    return render(request,
+                  'index.html', {'all_category': category}
+                  )
+    # return render(request, 'index.html')
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -31,5 +38,7 @@ urlpatterns = [
     url(r'^$', index, name='user_logout'),
     url(r'^$', index, name='user_register'),
     url(r'^$', index, name='search'),
+    url(r'^list', index, name='list'),
+
     # url(r'^$',index(sitemaps))
 ]

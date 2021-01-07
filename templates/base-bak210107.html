@@ -67,7 +67,7 @@
                     <li><a data-cont="首页" title="首页" href="{% url 'index' %}">首页</a></li>
                     {% for cate in all_category %}
                         <li><a data-cont="python" title="{{ cate.name }}"
-                               href="{% url 'list'  cate.path_name %}">{{ cate.name }}</a></li>
+                               href="{% url 'list' cate.path_name %}">{{ cate.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
