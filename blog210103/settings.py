@@ -91,7 +91,7 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'adminDB',
-        'NAME': 'db210103',
+        'NAME': 'blog',
 
     }
 }

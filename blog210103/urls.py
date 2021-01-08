@@ -13,21 +13,34 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from datetime import datetime
-
+from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
+from django.http import HttpResponse
 from django.shortcuts import render
-# from django.urls import path
+# from django.templatetags import static
+from django.template import Context
+from django.template.loader import get_template
+from django.views import static
 import xadmin
+# from blog210103 import settings
+
+def list_web(request,path):
+    pass
+
+def home(request):
+    t = get_template("index.html")
+    html = t.render(Context({
+        "template_dir":settings.TEMPLATE_DIRS[0],
+        "title":"Home",
+        "static_dir":settings.STATIC_ROOT}))
+    return HttpResponse(html)
 
 def index(request):
-    category = [{'name': 'python'},{'name':'git'},{'name': 'django'}]
-    # print('1111111111',datetime.now())
+    category = [{'name': 'python','path_name': 'python'},{'name':'git','path_name': 'git'},{'name': 'django','path_name': 'django'}]
     return render(request,
                   'index.html', {'all_category': category}
                   )
-    # return render(request, 'index.html')
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -38,7 +51,6 @@ urlpatterns = [
     url(r'^$', index, name='user_logout'),
     url(r'^$', index, name='user_register'),
     url(r'^$', index, name='search'),
-    url(r'^list', index, name='list'),
-
-    # url(r'^$',index(sitemaps))
+    url(r'^list/(?P<path>.*)$', list_web, name='list'),
+    url(r'static/(?P<path>.*)$',static.serve,{'document_root': settings.STATIC_ROOT},name='media'),
 ]
