@@ -24,27 +24,35 @@ from django.template.loader import get_template
 from django.views import static
 import xadmin
 # from blog210103 import settings
+from users.models import Pic
 
 def list_web(request,path):
     pass
 
-def home(request):
-    t = get_template("index.html")
-    html = t.render(Context({
-        "template_dir":settings.TEMPLATE_DIRS[0],
-        "title":"Home",
-        "static_dir":settings.STATIC_ROOT}))
-    return HttpResponse(html)
+# def home(request):
+#     t = get_template("index.html")
+#     html = t.render(Context({
+#         "template_dir":settings.TEMPLATE_DIRS[0],
+#         "title":"Home",
+#         "static_dir":settings.STATIC_ROOT}))
+#     return HttpResponse(html)
 
 def index(request):
     category = [{'name': 'python','path_name': 'python'},{'name':'git','path_name': 'git'},{'name': 'django','path_name': 'django'}]
+
+    roll_pic = Pic.objects.all().values('pic_name','pic_path').order_by("xuhao")
+    print('9999999', roll_pic)
+
     return render(request,
-                  'index.html', {'all_category': category}
+                  'index.html', {'all_category': category,
+                                 'all_bannerpic': roll_pic,
+                                 }
                   )
+    # return HttpResponse(roll_pic)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    url(r'^xadmin/', xadmin.site.urls),
+    url(r'^admin/', xadmin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^$', index, name='user_login'),
     url(r'^$', index, name='user_center'),
