@@ -27,8 +27,14 @@ import xadmin
 from users import models
 
 def list_web(request,path):
-    pass
+    return HttpResponse('html')
 
+def detail(request,art_id):
+    return HttpResponse('html2')
+
+def search(request):
+
+    return HttpResponse('html2')
 # def home(request):
 #     t = get_template("index.html")
 #     html = t.render(Context({
@@ -38,16 +44,25 @@ def list_web(request,path):
 #     return HttpResponse(html)
 
 def index(request):
-    # category = [{'name': 'python','path_name': 'python'},{'name':'git','path_name': 'git'},{'name': 'django','path_name': 'django'}]
     category = models.Category.objects.filter(is_tab=True).values('name','path_name')
+    num = models.Article.objects.count()
     roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
-    print('8888888', category)
+    all_day = 88
+
+    comment = models.Article.objects.filter(is_recommend=True).values('id','title','desc','click_num','add_time','image')
+    articles = models.Article.objects.all().order_by('-id') #values('id', 'title', 'desc', 'click_num', 'add_time','image','category').
+    print('8888888', num)
     print('9999999', roll_pic)
 
     return render(request,
                   'index.html', {
                         'all_category': category,
                         'all_bannerpic': roll_pic,
+                        'article_total': num,
+                        'all_day': all_day,
+                        'recommend_article': comment,
+                        'all_articles': articles,
+
                                  }
                   )
     # return HttpResponse(roll_pic)
@@ -60,7 +75,8 @@ urlpatterns = [
     url(r'^$', index, name='user_center'),
     url(r'^$', index, name='user_logout'),
     url(r'^$', index, name='user_register'),
-    url(r'^$', index, name='search'),
+    url(r'^detail/(?P<art_id>.*)$', detail, name='detail'),
+    url(r'^search/$', search, name='search'),
     url(r'^list/(?P<path>.*)$', list_web, name='list'),
     url(r'static/(?P<path>.*)$',static.serve,{'document_root': settings.STATIC_ROOT},name='media'),
 ]

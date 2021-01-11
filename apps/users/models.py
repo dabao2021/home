@@ -39,7 +39,7 @@ class Article(models.Model):
     check_status = models.IntegerField(default=0,verbose_name='审核状态',choices=((0,'审核中'),(1,'审核通过'),(2,'审核失败')))
     add_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间') #default=datetime.now,
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新日期')
-
+    image = models.TextField(verbose_name='图片',default="static/images/timg.jpg")
     category = models.ForeignKey(Category, null=True, blank=True, verbose_name='文章类别')
     desc = models.TextField(verbose_name='文章简介', default='')
     is_recommend = models.BooleanField(verbose_name='是否推荐', default=False)
