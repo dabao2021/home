@@ -24,7 +24,7 @@ from django.template.loader import get_template
 from django.views import static
 import xadmin
 # from blog210103 import settings
-from users.models import Pic
+from users import models
 
 def list_web(request,path):
     pass
@@ -38,14 +38,16 @@ def list_web(request,path):
 #     return HttpResponse(html)
 
 def index(request):
-    category = [{'name': 'python','path_name': 'python'},{'name':'git','path_name': 'git'},{'name': 'django','path_name': 'django'}]
-
-    roll_pic = Pic.objects.all().values('pic_name','pic_path').order_by("xuhao")
+    # category = [{'name': 'python','path_name': 'python'},{'name':'git','path_name': 'git'},{'name': 'django','path_name': 'django'}]
+    category = models.Category.objects.filter(is_tab=True).values('name','path_name')
+    roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
+    print('8888888', category)
     print('9999999', roll_pic)
 
     return render(request,
-                  'index.html', {'all_category': category,
-                                 'all_bannerpic': roll_pic,
+                  'index.html', {
+                        'all_category': category,
+                        'all_bannerpic': roll_pic,
                                  }
                   )
     # return HttpResponse(roll_pic)
