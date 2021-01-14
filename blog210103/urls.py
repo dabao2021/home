@@ -13,6 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from datetime import datetime
+import datetime
+import time
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
@@ -27,10 +30,15 @@ import xadmin
 from users import models
 
 def list_web(request,path):
-    
+    art = models.Article.objects.filter(category=models.Category.objects.filter(path_name=path))
 
-
+    return render(request,'search_list.html',
+                  {
+                    'all_articles': art
+                  }
+                  )
     # return HttpResponse('html')
+
 
 def detail(request,art_id):
 
@@ -71,15 +79,22 @@ def search(request):
 #     return HttpResponse(html)
 
 def index(request):
-    category = models.Category.objects.filter(is_tab=True).values('name','path_name')
-    num = models.Article.objects.count()
+    category = models.Category.objects.filter(is_tab=True).values('name','path_name','id')
     roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
-    all_day = 88
-
+    num = models.Article.objects.count()
+    today = datetime.datetime.now()#.strftime("%Y-%m-%d")
+    print(111111111,today)
+    old_day = datetime.datetime(2019,12,31)
+    all_day = str(today - old_day).split(" days",2)[0]
+    print(22222222222,all_day)
     comment = models.Article.objects.filter(is_recommend=True).values('id','title','desc','click_num','add_time','image')
     articles = models.Article.objects.all().order_by('-id') #values('id', 'title', 'desc', 'click_num', 'add_time','image','category').
-    print('8888888', num)
-    print('9999999', roll_pic)
+    tag = models.TagInfo.objects.all()
+
+
+
+    # print('8888888', num)
+    # print('9999999', roll_pic)
 
     return render(request,
                   'index.html', {
@@ -89,6 +104,7 @@ def index(request):
                         'all_day': all_day,
                         'recommend_article': comment,
                         'all_articles': articles,
+                        'cate_name': tag
 
                                  }
                   )

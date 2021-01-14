@@ -28,10 +28,16 @@ class CategoryXadmin():
     list_editable = ['name','title','is_tab','path_name']
     model_icon = 'fa fa-th-list'
 
+class TaginfoXadmin():
+    list_display = ['name','category','add_time']
+    list_editable = ['name','category']
+    model_icon = 'fa fa-picture-o'
+
 xadmin.site.register(models.Article,ArticleXadmin)
 xadmin.site.register(models.Zuozhe,ZuozheXadmin)
 xadmin.site.register(models.Pic,PicXadmin)
 xadmin.site.register(models.Category,CategoryXadmin)
+xadmin.site.register(models.TagInfo,TaginfoXadmin)
 
 
 

@@ -30,6 +30,18 @@ class Category(models.Model):
         verbose_name = '类别'
         verbose_name_plural = verbose_name
 
+class TagInfo(models.Model):
+    name = models.CharField(max_length=15,verbose_name='标签名')
+    add_time = models.DateTimeField(auto_now_add=True,null=True,blank=True,verbose_name='生成日期')
+    category = models.ForeignKey(Category,null=True,blank=True,verbose_name='类别')
+    def __str__(self):
+        return self.name
+    class Meta:
+        db_table = 'taginfo'
+        verbose_name ='标签'
+        verbose_name_plural = verbose_name
+
+
 class Article(models.Model):
     title = models.CharField(max_length=30, verbose_name='文章名', null=False, blank=False)
     content = models.TextField(verbose_name='内容', default='')
@@ -67,6 +79,8 @@ class Pic(models.Model):
         db_table = 'roll_pic'
         verbose_name = '轮播图管理'
         verbose_name_plural = verbose_name
+
+
 '''
 class UserProfile(AbstractUser):
     nick_name = models.CharField(max_length=15,verbose_name='用户名')
