@@ -27,18 +27,21 @@ import xadmin
 from users import models
 
 def list_web(request,path):
+    
 
-    return HttpResponse('html')
+
+    # return HttpResponse('html')
 
 def detail(request,art_id):
 
     art = models.Article.objects.filter(id = art_id)#.values('id', 'title','content','desc', 'click_num', 'add_time','image','category')
-
+    category = models.Category.objects.filter(is_tab=True).values('name', 'path_name')
     print(999999999,art[0].category.name,type(art[0].category.name))
 
     return render(request,
                   'detail.html', {
                       'art_obj': art[0],
+                      'all_category': category,
                   }
                   )
 
@@ -48,12 +51,15 @@ def comment(request,art_id):
 def search(request):
     word = request.GET.get("keyword")
     art = models.Article.objects.filter(title__contains = word)#.values('id','title','desc','click_num','add_time','image')
-    print (8888888, word)
+    print (8888888, word,len(art))
     # print (8888888, art[0]['title'])
-    return render(request,'search_list.html',
-        {"all_articles": art,
-         }
-    )
+    if len(art) == 0:
+        return render(request, 'none.html')
+    else:
+        return render(request,'search_list.html',
+            {"all_articles": art,
+            }
+            )
 
     # return HttpResponse('html2')
 # def home(request):
