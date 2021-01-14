@@ -13,8 +13,8 @@
                 <article class="excerpt excerpt-{{ forloop.counter }}"><a class="focus" href="{% url 'detail' art.id %}"
                                                                           title="{{ art.title }}" target="_blank"><img
                         class="thumb" data-original="{{ MEDIA_URL }}{{ art.image }}"
-                        src="{{ MEDIA_URL }}{{ art.image }}" alt="{{ art.title }}"
-                        style="display: inline;"></a>
+                        src="http://127.0.0.1:8000/static/images/timg.jpg" alt="{{ art.title }}"
+                        style="display: inline;"> </a>
                     <header><a class="cat" href="{% url 'list' art.category.path_name %}" title="{{ art.category.name }}">{{ art.category.name }}<i></i></a>
                         <h2><a href="{% url 'detail' art.id %}" title="{{ art.title }}"
                                target="_blank">{{ art.title }}</a></h2>

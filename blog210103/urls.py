@@ -27,14 +27,35 @@ import xadmin
 from users import models
 
 def list_web(request,path):
+
     return HttpResponse('html')
 
 def detail(request,art_id):
-    return HttpResponse('html2')
+
+    art = models.Article.objects.filter(id = art_id)#.values('id', 'title','content','desc', 'click_num', 'add_time','image','category')
+
+    print(999999999,art[0].category.name,type(art[0].category.name))
+
+    return render(request,
+                  'detail.html', {
+                      'art_obj': art[0],
+                  }
+                  )
+
+def comment(request,art_id):
+    return HttpResponse('comment')
 
 def search(request):
+    word = request.GET.get("keyword")
+    art = models.Article.objects.filter(title__contains = word)#.values('id','title','desc','click_num','add_time','image')
+    print (8888888, word)
+    # print (8888888, art[0]['title'])
+    return render(request,'search_list.html',
+        {"all_articles": art,
+         }
+    )
 
-    return HttpResponse('html2')
+    # return HttpResponse('html2')
 # def home(request):
 #     t = get_template("index.html")
 #     html = t.render(Context({
@@ -75,6 +96,8 @@ urlpatterns = [
     url(r'^$', index, name='user_center'),
     url(r'^$', index, name='user_logout'),
     url(r'^$', index, name='user_register'),
+    url(r'^comment/(?P<art_id>.*)$', comment, name='user_comment'),
+
     url(r'^detail/(?P<art_id>.*)$', detail, name='detail'),
     url(r'^search/$', search, name='search'),
     url(r'^list/(?P<path>.*)$', list_web, name='list'),
