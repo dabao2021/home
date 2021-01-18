@@ -53,6 +53,7 @@ class Article(models.Model):
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新日期')
     image = models.TextField(verbose_name='图片',default="static/images/timg.jpg")
     category = models.ForeignKey(Category, null=True, blank=True, verbose_name='文章类别')
+    tagInfo = models.ForeignKey(TagInfo, null=True, blank=True, verbose_name='文章标签')
     desc = models.TextField(verbose_name='文章简介', default='')
     is_recommend = models.BooleanField(verbose_name='是否推荐', default=False)
 

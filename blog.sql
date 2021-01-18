@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2021-01-15 00:17:12
+Date: 2021-01-18 23:00:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,20 +33,23 @@ CREATE TABLE `article` (
   `desc` longtext NOT NULL,
   `is_recommend` tinyint(1) NOT NULL,
   `image` longtext NOT NULL,
+  `tagInfo_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `article_zuozhe_id_ff172121_fk_zuozhe_id` (`zuozhe_id`),
   KEY `article_category_id_99127861_fk_category_id` (`category_id`),
+  KEY `article_tagInfo_id_79c70551_fk_taginfo_id` (`tagInfo_id`),
   CONSTRAINT `article_category_id_99127861_fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
-  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`zuozhe_id`) REFERENCES `zuozhe` (`id`)
+  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`zuozhe_id`) REFERENCES `zuozhe` (`id`),
+  CONSTRAINT `article_tagInfo_id_79c70551_fk_taginfo_id` FOREIGN KEY (`tagInfo_id`) REFERENCES `taginfo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('2', '文章题目2222', '内容222', '4', '10', '2', '1', '2021-01-05 15:08:26.188196', '2021-01-05 15:35:56.751467', '1', '22222222222', '1', 'static/images/timg.jpg');
-INSERT INTO `article` VALUES ('3', '文章题目3', '内容333', '1', '24', '2', '2', '2021-01-05 15:08:26.188196', '2021-01-05 15:35:53.121235', '2', '333333', '0', 'static/images/timg.jpg');
-INSERT INTO `article` VALUES ('4', '文章题目4', '内容4水电费水电费', '2', '5', '3', '1', '2021-01-05 15:08:26.188196', '2021-01-05 15:25:21.326393', '3', '444444', '1', 'static/images/timg.jpg');
-INSERT INTO `article` VALUES ('5', '文章题目5', '发的啥地方舒服舒服', '12', '1', '3', '1', '2021-01-05 15:17:24.127456', '2021-01-11 09:24:47.685873', '4', '55555555', '0', 'static/images/timg.jpg');
+INSERT INTO `article` VALUES ('2', '文章题目2222', '内容222', '4', '10', '2', '1', '2021-01-05 15:08:26.188196', '2021-01-05 15:35:56.751467', '1', '22222222222', '1', 'static/images/timg.jpg', '1');
+INSERT INTO `article` VALUES ('3', '文章题目3', '内容333', '1', '24', '2', '2', '2021-01-05 15:08:26.188196', '2021-01-05 15:35:53.121235', '2', '333333', '0', 'static/images/timg.jpg', '2');
+INSERT INTO `article` VALUES ('4', '文章题目4', '内容4水电费水电费', '2', '5', '3', '1', '2021-01-05 15:08:26.188196', '2021-01-05 15:25:21.326393', '3', '444444', '1', 'static/images/timg.jpg', '1');
+INSERT INTO `article` VALUES ('5', '文章题目5', '发的啥地方舒服舒服', '12', '1', '3', '1', '2021-01-05 15:17:24.127456', '2021-01-11 09:24:47.685873', '4', '55555555', '0', 'static/images/timg.jpg', '3');
 
 -- ----------------------------
 -- Table structure for `auth_group`
@@ -94,7 +97,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_ibfk_1` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -158,6 +161,7 @@ INSERT INTO `auth_permission` VALUES ('56', 'Can view 类别', '14', 'view_categ
 INSERT INTO `auth_permission` VALUES ('57', 'Can add 标签', '15', 'add_taginfo');
 INSERT INTO `auth_permission` VALUES ('58', 'Can change 标签', '15', 'change_taginfo');
 INSERT INTO `auth_permission` VALUES ('59', 'Can delete 标签', '15', 'delete_taginfo');
+INSERT INTO `auth_permission` VALUES ('60', 'Can view 标签', '15', 'view_taginfo');
 
 -- ----------------------------
 -- Table structure for `auth_user`
@@ -310,7 +314,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -344,6 +348,7 @@ INSERT INTO `django_migrations` VALUES ('26', 'users', '0010_pic_modify_time', '
 INSERT INTO `django_migrations` VALUES ('27', 'users', '0011_auto_20210111_1659', '2021-01-11 09:00:12.509873');
 INSERT INTO `django_migrations` VALUES ('28', 'users', '0012_auto_20210111_2215', '2021-01-11 14:15:57.494644');
 INSERT INTO `django_migrations` VALUES ('29', 'users', '0013_taginfo', '2021-01-14 14:09:32.204613');
+INSERT INTO `django_migrations` VALUES ('30', 'users', '0014_article_taginfo', '2021-01-18 14:31:38.741081');
 
 -- ----------------------------
 -- Table structure for `django_session`

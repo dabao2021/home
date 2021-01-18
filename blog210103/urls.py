@@ -14,60 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from datetime import datetime
-import datetime
-import time
+
 from django.conf import settings
 from django.conf.urls import url
-from django.contrib import admin
-from django.http import HttpResponse
-from django.shortcuts import render
-# from django.templatetags import static
-from django.template import Context
-from django.template.loader import get_template
 from django.views import static
 import xadmin
-# from blog210103 import settings
-from users import models
+from users import views
 
-def list_web(request,path):
-    art = models.Article.objects.filter(category=models.Category.objects.filter(path_name=path))
-
-    return render(request,'search_list.html',
-                  {
-                    'all_articles': art
-                  }
-                  )
-    # return HttpResponse('html')
-
-
-def detail(request,art_id):
-
-    art = models.Article.objects.filter(id = art_id)#.values('id', 'title','content','desc', 'click_num', 'add_time','image','category')
-    category = models.Category.objects.filter(is_tab=True).values('name', 'path_name')
-    print(999999999,art[0].category.name,type(art[0].category.name))
-
-    return render(request,
-                  'detail.html', {
-                      'art_obj': art[0],
-                      'all_category': category,
-                  }
-                  )
-
-def comment(request,art_id):
-    return HttpResponse('comment')
-
-def search(request):
-    word = request.GET.get("keyword")
-    art = models.Article.objects.filter(title__contains = word)#.values('id','title','desc','click_num','add_time','image')
-    print (8888888, word,len(art))
-    # print (8888888, art[0]['title'])
-    if len(art) == 0:
-        return render(request, 'none.html')
-    else:
-        return render(request,'search_list.html',
-            {"all_articles": art,
-            }
-            )
 
     # return HttpResponse('html2')
 # def home(request):
@@ -78,50 +31,19 @@ def search(request):
 #         "static_dir":settings.STATIC_ROOT}))
 #     return HttpResponse(html)
 
-def index(request):
-    category = models.Category.objects.filter(is_tab=True).values('name','path_name','id')
-    roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
-    num = models.Article.objects.count()
-    today = datetime.datetime.now()#.strftime("%Y-%m-%d")
-    print(111111111,today)
-    old_day = datetime.datetime(2019,12,31)
-    all_day = str(today - old_day).split(" days",2)[0]
-    print(22222222222,all_day)
-    comment = models.Article.objects.filter(is_recommend=True).values('id','title','desc','click_num','add_time','image')
-    articles = models.Article.objects.all().order_by('-id') #values('id', 'title', 'desc', 'click_num', 'add_time','image','category').
-    tag = models.TagInfo.objects.all()
-
-
-
-    # print('8888888', num)
-    # print('9999999', roll_pic)
-
-    return render(request,
-                  'index.html', {
-                        'all_category': category,
-                        'all_bannerpic': roll_pic,
-                        'article_total': num,
-                        'all_day': all_day,
-                        'recommend_article': comment,
-                        'all_articles': articles,
-                        'cate_name': tag
-
-                                 }
-                  )
-    # return HttpResponse(roll_pic)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     url(r'^admin/', xadmin.site.urls),
-    url(r'^$', index, name='index'),
-    url(r'^$', index, name='user_login'),
-    url(r'^$', index, name='user_center'),
-    url(r'^$', index, name='user_logout'),
-    url(r'^$', index, name='user_register'),
-    url(r'^comment/(?P<art_id>.*)$', comment, name='user_comment'),
+    url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='user_login'),
+    url(r'^$', views.index, name='user_center'),
+    url(r'^$', views.index, name='user_logout'),
+    url(r'^$', views.index, name='user_register'),
+    url(r'^comment/(?P<art_id>.*)$', views.comment, name='user_comment'),
 
-    url(r'^detail/(?P<art_id>.*)$', detail, name='detail'),
-    url(r'^search/$', search, name='search'),
-    url(r'^list/(?P<path>.*)$', list_web, name='list'),
+    url(r'^detail/(?P<art_id>.*)$', views.detail, name='detail'),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^list/(?P<path>.*)$', views.list_web, name='list'),
     url(r'static/(?P<path>.*)$',static.serve,{'document_root': settings.STATIC_ROOT},name='media'),
 ]
