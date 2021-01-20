@@ -7,11 +7,12 @@ from users import models
 
 
 class ArticleXadmin():
-    list_display = ['id', 'title','desc', 'content', 'is_recommend', 'sort', 'click_num','check_status','category','zuozhe','update_time','add_time']
-    list_editable = ['title','desc','content','check_status','zuozhe','category','is_recommend','update_time','add_time']
+    list_display = ['id', 'title','desc', 'content', 'is_recommend', 'sort', 'click_num','check_status','image','category','zuozhe','update_time','add_time']
+    list_editable = ['title','desc','content','check_status','zuozhe','category','is_recommend','image','update_time','add_time']
     search_fields = ['title', 'content']
     model_icon = 'fa fa-th-list'
     list_per_page = 10
+    style_fields = {"content": "ueditor"}
 
 class ZuozheXadmin():
     list_display = ['id', 'zuozheNo', 'name']

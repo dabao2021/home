@@ -11,7 +11,7 @@
              <div class="carousel-inner" role="listbox">
 
                  {% for p in all_bannerpic%}
-                     <div class="item active">
+                     <div class="item">
                     <a href="http://www.debug5.com/detail/480/" target="_blank" title="{{ p.pic_name }}">
                         <img src="{{ p.pic_path }}" alt="{{ p.pic_name }}" class="img-responsive"></a>
                      </div>
@@ -67,7 +67,7 @@
                                                                                               alt="{{ art.title }}"
                                                                                               style="display: inline;"></a>
                 <header><a class="cat" href="{% url 'list' art.category.path_name %}" title="{{ art.category.name }}" target="_blank">{{ art.category.name }}<i></i></a>
-                    <h2><a href="{% url 'detail' art.id %}" title="{{ art.title }}" target="_blank">{{ art.title }}</a>
+                    <h2><a href="{% url 'detail' art.id %}" title="{{ art.title }}" target="_blank">{{ art.title }}{{ MEDIA_URL }}</a>
                     </h2>
                 </header>
                 <p class="meta">
@@ -86,14 +86,14 @@
     </div>
     {% block Tag %}
             <div class="widget widget_sentence">
-                <h3>标签云</h3>
+                <h3>标签云首页</h3>
                 <div class="widget-sentence-content">
                     <ul class="plinks ptags">
 {#                        直接 管道符 进行切片 和 倒序#}
                         {% for cate in cate_name|slice:':20:-1' %}
                         <li><a href="{% url 'list' cate.path_name %}" title="{{ cate.name }}"
                                draggable="false">{{ cate.name }} <span
-                                class="badge">{{ cate.articleinfo_set.count }}</span></a>
+                                class="badge">{{ cate.article_set.count }}</span></a>
                         </li>
                         {% endfor %}
                     </ul>

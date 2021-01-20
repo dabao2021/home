@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from DjangoUeditor.models import UEditorField
 # from datetime import datetime
 
 
@@ -44,7 +45,10 @@ class TagInfo(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=30, verbose_name='文章名', null=False, blank=False)
-    content = models.TextField(verbose_name='内容', default='')
+    # content = models.TextField(verbose_name='内容', default='')
+    content = UEditorField(verbose_name='内容', width=600, height=300, toolbars="full",
+                                  imagePath="course/ueditor/", filePath="course/ueditor/",
+                                  upload_settings={"imageMaxSize": 1204000},default='')
     sort = models.IntegerField(verbose_name='顺序', default=0)
     click_num = models.IntegerField(default=0, verbose_name='点击量')
     zuozhe = models.ForeignKey(Zuozhe, null=True, blank=True,verbose_name='作者')  # ,related_name='id'

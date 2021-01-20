@@ -24,7 +24,7 @@
                         title="评论"
                         target="_blank"><i
                         class="glyphicon glyphicon-comment"></i>{{ art.cont_num }}</a></p>
-                <p class="note">{{ art.desc }}</p>
+                <p class="note">{{ art.desc }}{{ BASE_DIR }}</p>
             </article>
         {% endfor %}
 
@@ -65,7 +65,7 @@
                 {#直接 管道符 进行切片 和 倒序#}
                 {% for tag in cate_obj.taginfo_set.all|slice:':10:-1' %}
                     <li><a href="{% url 'list' cate_obj.path_name %}?tag={{ tag.id }}" title="{{ tag.name }}"
-                           draggable="false">{{ tag.name }} <span class="badge">{{ tag.articleinfo_set.count }}</span></a>
+                           draggable="false">{{ tag.name }} <span class="badge">{{ tag.article_set.count }}</span></a>
                     </li>
                 {% endfor %}
             </ul>

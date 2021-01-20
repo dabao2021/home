@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import sys
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'users',
+    'DjangoUeditor',
 
 ]
 
@@ -71,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -137,3 +140,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+

@@ -163,7 +163,7 @@
                 {% for tag in all_tags %}
                     <li><a href="{% url 'list' tag.category.path_name %}?tag={{ tag.id }}" title="{{ tag.name }}"
                            draggable="false">{{ tag.name }} <span
-                            class="badge">{{ tag.articleinfo_set.count }}</span></a>
+                            class="badge">{{ tag.article_set.count }}</span></a>
                     </li>
                 {% endfor %}
             </ul>

@@ -1,31 +1,48 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+
+from blog210103.settings import STATIC_URL, MEDIA_URL
 from users import models
 import datetime
 
-
 # Create your views here.
 
-
-
 def list_web(request,path):
+    tag_temp = request.GET.get("tag")
+
+
     cate_obj = models.Category.objects.filter(path_name=path)[0]
     # art = models.Article.objects.filter(category_id=a[0].id)
     art = cate_obj.article_set.all()
     category = models.Category.objects.filter(is_tab = 1)
     tag = cate_obj.taginfo_set.all()
     # tag = models.TagInfo.objects.all()
-    # print(7777777,a[0])
-
-    return render(request,'list.html',
+    # print(7777777,MEDIA_URL)
+    if tag_temp:
+        # art = cate_obj.article_set.filter(tagInfo_id=int(tag_temp))
+        return render(request,'list.html',
                   {
                     'all_articles': art,
                     'all_tags': tag,
                     'all_category':category,
                     'cate_obj':cate_obj,
+                    # 'MEDIA_URL': MEDIA_URL,
 
                   }
                   )
+    else:
+        # art = cate_obj.article_set.filter(tagInfo_id=int(tag_temp))
+        return render(request, 'list.html',
+                      {
+                          'all_articles': art,
+                          'all_tags': tag,
+                          'all_category': category,
+                          'cate_obj': cate_obj,
+                          # 'MEDIA_URL': MEDIA_URL,
+
+                      }
+                      )
+
     # return HttpResponse('html')
 
 
@@ -42,6 +59,7 @@ def detail(request,art_id):
                       'art_obj': art[0],
                       'all_category': category,
                       'all_tags':tag,
+
                   }
                   )
 
@@ -79,14 +97,15 @@ def index(request):
     roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
     num = models.Article.objects.count()
     today = datetime.datetime.now()#.strftime("%Y-%m-%d")
-    print(111111111,today)
+    # print(111111111,today)
     old_day = datetime.datetime(2019,12,31)
     all_day = str(today - old_day).split(" days",2)[0]
-    print(22222222222,all_day)
+    # print(22222222222,all_day)
     comment = models.Article.objects.filter(is_recommend=True).values('id','title','desc','click_num','add_time','image')
     articles = models.Article.objects.all().order_by('-id') #values('id', 'title', 'desc', 'click_num', 'add_time','image','category').
     tag = models.TagInfo.objects.all()
-
+    # print('8888888tag',tag[0].article_set.count())
+    # print ('MEDIA_URL:',MEDIA_URL)
     return render(request,
                   'index.html', {
                         'all_category': category,
@@ -95,7 +114,8 @@ def index(request):
                         'all_day': all_day,
                         'recommend_article': comment,
                         'all_articles': articles,
-                        'cate_name': tag
+                        'cate_name': tag,
+                        # 'MEDIA_URL':MEDIA_URL
 
                                  }
                   )

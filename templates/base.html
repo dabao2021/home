@@ -131,7 +131,7 @@
                                     <li><a href="{% url 'list' cate.path_name %}?tag={{ cate.id }}"
                                            title="{{ cate.name }}"
                                            draggable="false">{{ cate.name }} <span
-                                            class="badge">{{ cate.articleinfo_set.count }}</span></a>
+                                            class="badge">{{ cate.article_set.count }}</span></a>
                                     </li>
                                 {% endfor %}
                             </ul>
