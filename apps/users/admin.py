@@ -34,11 +34,24 @@ class TaginfoXadmin():
     list_editable = ['name','category']
     model_icon = 'fa fa-picture-o'
 
+class CommentXadmin():
+    list_display = ['id','content','comment_man','article','add_time']
+    list_editable = ['content','comment_man','article']
+    model_icon = 'fa fa-th-list'
+
+class UserXadmin():
+    list_display = ['id','username','nick_name','password','image','email','is_start','addtime']
+    list_editable = ['username','nick_name','password','image','email','is_start']
+    model_icon = 'fa fa-picture-o'
+
+
 xadmin.site.register(models.Article,ArticleXadmin)
 xadmin.site.register(models.Zuozhe,ZuozheXadmin)
 xadmin.site.register(models.Pic,PicXadmin)
 xadmin.site.register(models.Category,CategoryXadmin)
 xadmin.site.register(models.TagInfo,TaginfoXadmin)
+xadmin.site.register(models.Comment,CommentXadmin)
+xadmin.site.register(models.User,UserXadmin)
 
 
 

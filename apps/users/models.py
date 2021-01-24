@@ -85,21 +85,54 @@ class Pic(models.Model):
         verbose_name = '轮播图管理'
         verbose_name_plural = verbose_name
 
-
-'''
-class UserProfile(AbstractUser):
-    nick_name = models.CharField(max_length=15,verbose_name='用户名')
-    image = models.ImageField(verbose_name='头像图片')
-    add_time = models.DateTimeField(verbose_name='生成日期',auto_now_add=True,null=True,blank=True)
-    modify_time = models.DateTimeField(verbose_name='修改日期',auto_now=True,null=True,blank=True)
-    is_start = models.BooleanField(verbose_name='xxxx')
+class User(models.Model):
+    username = models.CharField(max_length=15, verbose_name='用户名',null=True,blank=True)
+    password = models.CharField(max_length=20, verbose_name='密码',null=True,blank=True)
+    nick_name = models.CharField(max_length=15,verbose_name='昵称',null=True,blank=True)
+    email = models.CharField(max_length=15, verbose_name='邮箱',null=True,blank=True)
+    image = models.ImageField(upload_to='user/upload/', verbose_name='头像图片',null=True,blank=True)
+    addtime = models.DateTimeField(verbose_name='生成日期',auto_now_add=True,null=True,blank=True)
+    # modify_time = models.DateTimeField(verbose_name='修改日期',auto_now=True,null=True,blank=True)
+    is_start = models.BooleanField(default=False, verbose_name='激活')
 
     def __str__(self):
         return self.username
 
     class Meta:
-        db_table = 'userprofile'
+        db_table = 'user'
         verbose_name = '用户表'
         verbose_name_plural = verbose_name
-'''
+
+class Comment(models.Model):
+    content = models.TextField(verbose_name='评论内容', null=True, blank=True)
+    add_time = models.DateTimeField(auto_now_add=True,null=True,blank=True,verbose_name='生成日期')
+    comment_man = models.ForeignKey(User,null=True,blank=True,verbose_name='用户名')
+    article = models.ForeignKey(Article,null=True,blank=True,verbose_name='评论的文章')
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        db_table = 'comment'
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name
+
+
+
+
+# class UserProfile(AbstractUser):
+#     nick_name = models.CharField(max_length=15,verbose_name='用户名')
+#     # image = models.ImageField(upload_to='user/upload/', verbose_name='头像图片')
+#     addtime = models.DateTimeField(verbose_name='生成日期',auto_now_add=True,null=True,blank=True)
+#     # modify_time = models.DateTimeField(verbose_name='修改日期',auto_now=True,null=True,blank=True)
+#     is_start = models.BooleanField(default=False, verbose_name='激活')
+#
+#     def __str__(self):
+#         return self.username
+#
+#     class Meta:
+#         # db_table = 'userprofile'
+#         verbose_name = '用户表'
+#         verbose_name_plural = verbose_name
+
 

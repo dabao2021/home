@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
 
 ]
-
+# AUTH_USER_MODEL = 'users.UserProfile'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -142,5 +142,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 MEDIA_URL = '/static/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = 'static/media/'
+# MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+
 

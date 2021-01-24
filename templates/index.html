@@ -10,12 +10,20 @@
             </ol>
              <div class="carousel-inner" role="listbox">
 
-                 {% for p in all_bannerpic%}
-                     <div class="item">
-                    <a href="http://www.debug5.com/detail/480/" target="_blank" title="{{ p.pic_name }}">
-                        <img src="{{ p.pic_path }}" alt="{{ p.pic_name }}" class="img-responsive"></a>
-                     </div>
-                 {% endfor %}
+                    <div class="item active">
+                        <a href="#" target="_blank" title="python爬虫教程">
+                            <img src="/static/images/202008122338.jpg" alt="python爬虫教程" class="img-responsive"></a>
+                    </div>
+                    <div class="item">
+                        <a href="#" target="_blank" title="tornado异步非阻塞教程">
+                            <img src="/static/images/202008122347.jpg" alt="tornado异步非阻塞教程"
+                                 class="img-responsive"></a>
+                    </div>
+                    <div class="item">
+                        <a href="#" target="_blank" title="python学习">
+                            <img src="/static/images/202008102025.jpg" alt="python"
+                                 class="img-responsive"></a>
+                    </div>
 
              </div>
 <!--
@@ -52,7 +60,7 @@
             </article>
         {% endfor %}
         <div class="title">
-            <h3>最新发布</h3>
+            <h3>最新发布{{ BASE_DIR }} vv  {{ MEDIA_URL }}</h3>
             <div class="more">
                 {% for cate in new_category %}
                 <a href="#" title="{{ cate.name }}">{{ cate.name }}</a>
@@ -76,7 +84,7 @@
                                                                                                    href="##comment"
                                                                                                    title="评论"
                                                                                                    target="_blank"><i
-                        class="glyphicon glyphicon-comment"></i> {{ art.cont_num }}</a>
+                        class="glyphicon glyphicon-comment"></i> {{ art.comment_set.count }}</a>
                 </p>
                <p class="note">{{ art.desc }}</p>
             </article>

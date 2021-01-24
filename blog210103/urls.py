@@ -33,7 +33,6 @@ from django.views.static import serve
 #         "static_dir":settings.STATIC_ROOT}))
 #     return HttpResponse(html)
 
-
 urlpatterns = [
     # path('admin/', admin.site.urls),
     url(r'^admin/', xadmin.site.urls),
@@ -41,9 +40,8 @@ urlpatterns = [
     url(r'^$', views.index, name='user_login'),
     url(r'^$', views.index, name='user_center'),
     url(r'^$', views.index, name='user_logout'),
-    url(r'^$', views.index, name='user_register'),
+    url(r'^register/$', views.user_register, name='user_register'),
     url(r'^comment/(?P<art_id>.*)$', views.comment, name='user_comment'),
-
     url(r'^detail/(?P<art_id>.*)$', views.detail, name='detail'),
     url(r'^search/$', views.search, name='search'),
     url(r'^list/(?P<path>.*)$', views.list_web, name='list'),
