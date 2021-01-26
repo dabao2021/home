@@ -1,3 +1,4 @@
+from django import forms
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -137,18 +138,50 @@ def search(request):
             }
             )
 
+class RegisterForm(forms.Form):
+    email = forms.EmailField(required=True,error_messages={'required':'邮箱必填'})
+    password = forms.CharField(min_length=2,required=True,error_messages={'required':'密码必填'})
+    nick_name = forms.CharField(min_length=2,required=True,error_messages={'required':'昵称必填'})
+
 def user_register(request):
     email = request.POST.get('email')
     nick_name = request.POST.get('nick_name')
     password = request.POST.get('password')
-    if password:
+
+    form = RegisterForm(request.POST)
+
+    print('form.is_valid:',form.is_valid())
+    print(form.errors)
+
+    if (email is None) or (nick_name is None) or (password is None):
+        return render(request, 'user_register.html')
+    elif form.is_valid():
+
         user_obj = models.User.objects.create(email=email, nick_name=nick_name, password=password)
-        return HttpResponse("注册成功！")
-    else:
-        return render(request,'user_register.html',
-                {
+        category = models.Category.objects.filter(is_tab=True).values('name', 'path_name', 'id')
+        return render(request,'wait_start.html',
+                {'all_category':category,
+                 'user_obj':user_obj,
                 }
                 )
+    else:
+        return render(request, 'user_register.html', {'register_form': form, })
+
+
+
+    # if (email is None) or (nick_name is None) or (password is None) :
+    #     return render(request, 'user_register.html')
+    # elif (email == '') or (nick_name == '') or (password == ''):
+    #     return render(request, 'user_register.html',{'register_form':form,})
+    # else:
+    #     user_obj = models.User.objects.create(email=email, nick_name=nick_name, password=password)
+    #     category = models.Category.objects.filter(is_tab=True).values('name', 'path_name', 'id')
+    #
+    #     return render(request,'wait_start.html',
+    #             {'all_category':category,
+    #              'user_obj':user_obj,
+    #             }
+    #             )
 
 def index(request):
     category = models.Category.objects.filter(is_tab=True).values('name','path_name','id')

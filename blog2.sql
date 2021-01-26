@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2021-01-25 00:30:35
+Date: 2021-01-26 23:17:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -199,7 +199,7 @@ CREATE TABLE `auth_user` (
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$36000$PcnVOkIXqmf3$H74o1W3g8AmjKvvk+NB1DQfZQ1x1kGsZYUDyMTZ37eU=', '2021-01-11 03:14:53.574873', '1', 'xadmin', '', '', '', '1', '1', '2021-01-05 13:02:38.273769');
+INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$36000$PcnVOkIXqmf3$H74o1W3g8AmjKvvk+NB1DQfZQ1x1kGsZYUDyMTZ37eU=', '2021-01-26 14:30:34.500482', '1', 'xadmin', '', '', '', '1', '1', '2021-01-05 13:02:38.273769');
 
 -- ----------------------------
 -- Table structure for `auth_user_groups`
@@ -422,6 +422,7 @@ CREATE TABLE `django_session` (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('cp7c52ojs51uhokaij781dtz4wk0b45v', 'Njg3ZTdlNTZlMTQ3ZDVjMDdhMzViZTA0NjEyN2U5YjhlYzFhOWMzNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhNGM5MTQ5NWM3MDUxNDQxNzQ2OWJmNzMwZGM2Y2ZiZGYzZmNiYTc3IiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJhcnRpY2xlIl0sIiJdfQ==', '2021-01-25 09:28:01.316873');
+INSERT INTO `django_session` VALUES ('iy899na2fnt2cqg3mfyto5k0e5yjrwnj', 'YWE2ZGMwZjJkMjQwZDRlMTUzODVlYmEzZGI1MzI4ZmViMDkzZWUzODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhNGM5MTQ5NWM3MDUxNDQxNzQ2OWJmNzMwZGM2Y2ZiZGYzZmNiYTc3In0=', '2021-02-09 14:30:34.516786');
 INSERT INTO `django_session` VALUES ('wftlrvaen7k9k577mzu7zob16kc21k6d', 'Njg3ZTdlNTZlMTQ3ZDVjMDdhMzViZTA0NjEyN2U5YjhlYzFhOWMzNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhNGM5MTQ5NWM3MDUxNDQxNzQ2OWJmNzMwZGM2Y2ZiZGYzZmNiYTc3IiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJhcnRpY2xlIl0sIiJdfQ==', '2021-02-04 12:31:32.415934');
 
 -- ----------------------------
@@ -478,22 +479,20 @@ CREATE TABLE `user` (
   `username` varchar(15) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
   `nick_name` varchar(15) DEFAULT NULL,
-  `email` varchar(15) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   `addtime` datetime(6) DEFAULT NULL,
   `is_start` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'aaa', '123123', 'aaa啊', '349900176@q', 'user/upload/default2.jpg', '2021-01-24 01:16:55.000000', '1');
 INSERT INTO `user` VALUES ('2', 'dabo', '123123', '大波', '349900176@qq.co', 'user/upload/default4.jpg', '2021-01-23 17:19:42.331548', '1');
-INSERT INTO `user` VALUES ('3', '', '123123', '志华', '55558888@qq.com', '', '2021-01-24 15:51:38.871765', '0');
-INSERT INTO `user` VALUES ('6', null, '123123', 'Kasa', '9468568@qq.com', '', '2021-01-24 16:26:43.492392', '0');
-INSERT INTO `user` VALUES ('7', null, '123123', 'Kasa', '9468568@qq.com', '', '2021-01-24 16:28:46.400098', '0');
-INSERT INTO `user` VALUES ('8', null, 'asdsa', 'asdasd', 'asdasd', '', '2021-01-24 16:29:29.519433', '0');
+INSERT INTO `user` VALUES ('26', null, '123123123', '我的中国心啊', '5666654646@sohu.com', '', '2021-01-25 16:41:31.798852', '0');
+INSERT INTO `user` VALUES ('27', null, '123123', '你打大宝贝呢', '349900176@qq.com', '', '2021-01-26 12:25:54.964141', '0');
 
 -- ----------------------------
 -- Table structure for `xadmin_bookmark`

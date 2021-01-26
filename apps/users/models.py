@@ -1,7 +1,9 @@
+from django import forms
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from DjangoUeditor.models import UEditorField
 # from datetime import datetime
+
 
 
 class Zuozhe(models.Model):
@@ -118,7 +120,12 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
 
 
-
+    # def __str__(self):
+    #     return self.nick_name
+    # class Meta:
+    #     db_table = 'comment'
+    #     verbose_name = '表单验证'
+    #     verbose_name_p
 
 # class UserProfile(AbstractUser):
 #     nick_name = models.CharField(max_length=15,verbose_name='用户名')
