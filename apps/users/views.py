@@ -1,10 +1,14 @@
 from django import forms
+# from django.contrib.auth import login
+from django.contrib.auth import authenticate
+from django.contrib.auth.views import login
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from blog210103.settings import STATIC_URL, MEDIA_URL
 from users import models
 import datetime
+import hashlib
 
 # Create your views here.
 def iPagination(params):
@@ -144,28 +148,41 @@ class RegisterForm(forms.Form):
     nick_name = forms.CharField(min_length=2,required=True,error_messages={'required':'昵称必填'})
 
 def user_register(request):
-    email = request.POST.get('email')
-    nick_name = request.POST.get('nick_name')
-    password = request.POST.get('password')
 
-    form = RegisterForm(request.POST)
-
-    print('form.is_valid:',form.is_valid())
-    print(form.errors)
-
-    if (email is None) or (nick_name is None) or (password is None):
+    if request.method == 'GET':
         return render(request, 'user_register.html')
-    elif form.is_valid():
-
-        user_obj = models.User.objects.create(email=email, nick_name=nick_name, password=password)
-        category = models.Category.objects.filter(is_tab=True).values('name', 'path_name', 'id')
-        return render(request,'wait_start.html',
-                {'all_category':category,
-                 'user_obj':user_obj,
-                }
-                )
     else:
-        return render(request, 'user_register.html', {'register_form': form, })
+        form = RegisterForm(request.POST)
+        #邮箱已注册把已存在信息报给注册模板
+        print('form.is_valid:',form.is_valid())
+        print(form.errors)
+        # #点击注册进入user_register.html模板：
+        # if (e_mail is None) or (nick_name is None) or (password is None):
+        #     return render(request, 'user_register.html')
+        #注册信息检验通过：
+        if form.is_valid():
+
+            e_mail = form.cleaned_data['email']
+            nick_name = form.cleaned_data['nick_name']
+            password = form.cleaned_data['password']
+            user = models.User.objects.filter(email=e_mail)
+            if user:
+                return render(request, 'user_register.html', {'msg': '邮箱已存在'})
+            #md5加密
+            m = hashlib.md5()
+            m.update(password.encode('utf-8'))
+            print(m.hexdigest())
+            #通过ORM写入数据库
+            user_obj = models.User.objects.create(email=e_mail, nick_name=nick_name, password=m.hexdigest())
+            category = models.Category.objects.filter(is_tab=True).values('name', 'path_name', 'id')
+            return render(request,'wait_start.html',
+                    {'all_category':category,
+                     'user_obj':user_obj,
+                    }
+                    )
+        #如果校验不通过，把错误信息报给注册模板
+        else:
+            return render(request, 'user_register.html', {'register_form': form, })
 
 
 
@@ -183,6 +200,45 @@ def user_register(request):
     #             }
     #             )
 
+#构建用于“登录视图”的验证表单类
+class LoginForm(forms.Form):
+    email = forms.EmailField(required=True,error_messages={'required':'邮箱必填'})
+    password = forms.CharField(required=True,error_messages={'required':'密码必填'})
+#登录视图
+def user_login(request):
+    if request.method == 'GET':#Get传递的情况
+        return render(request, 'user_login.html')
+    else:#post传递的情况
+        form = LoginForm(request.POST)
+
+        # 点击登录进入user_login.html模板：
+        if form.is_valid():
+            e_mail = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user1 = models.User.objects.filter(email=e_mail)
+
+            #假设用户不存在
+            if user1.count()==0:
+                return render(request, 'user_login.html', {'msg': '用户不存在', })
+            #假设用户存在，比较密码一致性
+            else:
+
+                m = hashlib.md5()
+                m.update(password.encode('utf-8'))
+
+                user0 = authenticate(username=e_mail, password=password)
+                print(7777777777777, type(user0), user0)
+
+                if user1[0].password == m.hexdigest():
+                    # user0= {'username':'bobo',
+                    # 'is_authenticated':'1'}
+                    login(request,user0)
+                    print(888888888888888,password)
+                    return redirect('/')
+        else:
+            return render(request, 'user_login.html', {'loginform': form, })
+
+#主页视图
 def index(request):
     category = models.Category.objects.filter(is_tab=True).values('name','path_name','id')
     roll_pic = models.Pic.objects.all().values('pic_name','pic_path').order_by('xuhao')
@@ -207,12 +263,12 @@ def index(request):
         else:
             new_art.append(i)
 
-    print(11111111,new_art)
+    # print(11111111,new_art)
     art_all = []
     for j in new_art:
         art_item = models.Article.objects.filter(id=j['article_id'])
         art_all.append(art_item[0])
-    print(art_all)
+    # print(art_all)
             # print(new_art_obj)
         # new_art = new_art.append(new_art_obj[0])
 

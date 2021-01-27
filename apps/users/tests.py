@@ -3,7 +3,7 @@ import hashlib
 hash = hashlib.sha256()
 hash.update('debug5.com'.encode('utf-8'))
 print(hash.hexdigest())
-
+import hashlib
 m = hashlib.md5()
 m.update('debug5.com'.encode('utf-8'))
 print(m.hexdigest())

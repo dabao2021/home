@@ -37,7 +37,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     url(r'^admin/', xadmin.site.urls),
     url(r'^$', views.index, name='index'),
-    url(r'^$', views.index, name='user_login'),
+    url(r'^login/$', views.user_login, name='user_login'),
     url(r'^$', views.index, name='user_center'),
     url(r'^$', views.index, name='user_logout'),
     url(r'^register/$', views.user_register, name='user_register'),

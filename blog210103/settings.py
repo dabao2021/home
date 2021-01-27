@@ -99,6 +99,16 @@ DATABASES = {
     }
 }
 
+#邮箱设置：
+EMAIL_HOST = 'smtp.163.com'
+#端口号
+EMAIL_PORT = 25
+#发送者的邮箱
+EMAIL_HOST_USER = 'zzbo2@163.COM'
+#发送者的邮箱授权码 开启POP3/SMTP，授权密码
+EMAIL_HOST_PASSWORD = 'TGBMPCNQJECYZQIQ'
+EMAIL_FROM = 'zzbo2@163.com'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -123,14 +133,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
-
 TIME_ZONE = 'Asia/shanghai'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
