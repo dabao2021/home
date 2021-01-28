@@ -1,7 +1,7 @@
 from django import forms
-# from django.contrib.auth import login
+from django.contrib.auth import login
 from django.contrib.auth import authenticate
-from django.contrib.auth.views import login
+# from django.contrib.auth.views import login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -76,7 +76,6 @@ def list_web(request,path):
                     'all_category':category,
                     'cate_obj':cate_obj,
                     # 'MEDIA_URL': MEDIA_URL,
-
                   }
                   )
     else:
@@ -215,26 +214,27 @@ def user_login(request):
         if form.is_valid():
             e_mail = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user1 = models.User.objects.filter(email=e_mail)
+            user0 = models.User.objects.filter(email=e_mail)
 
             #假设用户不存在
-            if user1.count()==0:
+            if user0.count()==0:
                 return render(request, 'user_login.html', {'msg': '用户不存在', })
             #假设用户存在，比较密码一致性
             else:
-
                 m = hashlib.md5()
                 m.update(password.encode('utf-8'))
+                # user0 = authenticate(username=e_mail, password=password)
+                print(7777777777777, type(user0[0]), user0[0])
 
-                user0 = authenticate(username=e_mail, password=password)
-                print(7777777777777, type(user0), user0)
-
-                if user1[0].password == m.hexdigest():
+                if user0[0].password == m.hexdigest():
                     # user0= {'username':'bobo',
                     # 'is_authenticated':'1'}
-                    login(request,user0)
-                    print(888888888888888,password)
+                    print(888888888888888, password)
+                    login(request,user0[0])
+                    print(999999999999999, m.hexdigest())
                     return redirect('/')
+                else:
+                    return render(request, 'user_login.html', {'msg': '密码错误', })
         else:
             return render(request, 'user_login.html', {'loginform': form, })
 

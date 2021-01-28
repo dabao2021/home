@@ -90,8 +90,8 @@ class Pic(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=15, verbose_name='用户名',null=True,blank=True)
     password = models.CharField(max_length=50, verbose_name='密码',null=True,blank=True)
-    nick_name = models.CharField(max_length=15,verbose_name='昵称',null=True,blank=True)
-    email = models.CharField(max_length=15, verbose_name='邮箱',null=True,blank=True)
+    nick_name = models.CharField(max_length=30,verbose_name='昵称',null=True,blank=True)
+    email = models.CharField(max_length=30, verbose_name='邮箱',null=True,blank=True)
     image = models.ImageField(upload_to='user/upload/', verbose_name='头像图片',null=True,blank=True)
     addtime = models.DateTimeField(verbose_name='生成日期',auto_now_add=True,null=True,blank=True)
     # modify_time = models.DateTimeField(verbose_name='修改日期',auto_now=True,null=True,blank=True)

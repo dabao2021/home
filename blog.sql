@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地root@mysql
-Source Server Version : 50722
+Source Server         : local_mysql
+Source Server Version : 50726
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50722
+Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2021-01-28 00:10:18
+Date: 2021-01-28 15:43:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -356,7 +356,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -405,6 +405,8 @@ INSERT INTO `django_migrations` VALUES ('41', 'users', '0025_auto_20210124_0101'
 INSERT INTO `django_migrations` VALUES ('42', 'xadmin', '0004_auto_20210122_2340', '2021-01-23 17:01:28.354748');
 INSERT INTO `django_migrations` VALUES ('43', 'users', '0026_auto_20210124_0134', '2021-01-23 17:34:36.066808');
 INSERT INTO `django_migrations` VALUES ('44', 'users', '0027_auto_20210125_0023', '2021-01-24 16:23:25.146232');
+INSERT INTO `django_migrations` VALUES ('45', 'users', '0028_auto_20210128_1515', '2021-01-28 07:15:40.475627');
+INSERT INTO `django_migrations` VALUES ('46', 'users', '0029_auto_20210128_1516', '2021-01-28 07:16:47.668627');
 
 -- ----------------------------
 -- Table structure for `django_session`
@@ -421,8 +423,15 @@ CREATE TABLE `django_session` (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
+INSERT INTO `django_session` VALUES ('43pihykisn97o4q6evfz0vua8a6zqj3c', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:34:14.554627');
+INSERT INTO `django_session` VALUES ('8k3ed72hpxn9xe65fxw0cxwwl85jrlu7', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:01:22.021627');
+INSERT INTO `django_session` VALUES ('a8sw0n6bqpmj8iyek3oqbyzjgjix6ewa', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:33:46.123627');
+INSERT INTO `django_session` VALUES ('ar4j2vjoaj7bcakr8tc2wyvf6tsflhah', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 06:58:32.971627');
 INSERT INTO `django_session` VALUES ('cp7c52ojs51uhokaij781dtz4wk0b45v', 'Njg3ZTdlNTZlMTQ3ZDVjMDdhMzViZTA0NjEyN2U5YjhlYzFhOWMzNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhNGM5MTQ5NWM3MDUxNDQxNzQ2OWJmNzMwZGM2Y2ZiZGYzZmNiYTc3IiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJhcnRpY2xlIl0sIiJdfQ==', '2021-01-25 09:28:01.316873');
+INSERT INTO `django_session` VALUES ('n0mpy9cow0ekow9smwl34br2zyykzfw0', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:30:18.398627');
 INSERT INTO `django_session` VALUES ('nk3atue8g8xfy8ugnz4l09wd6sr8t6ux', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-10 15:15:07.866248');
+INSERT INTO `django_session` VALUES ('tgs2qzv95zlfur0efsvu6cibqsc5pqsv', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:34:51.451627');
+INSERT INTO `django_session` VALUES ('ungxmr8n9b0noio8no3tszi3cnj8bx81', 'MmY3ZDkwZDg5MzgzMTFiYzdkMDY5YWNmNDU3ZTMwNWI4OWNlZjVlMTp7fQ==', '2021-02-11 07:41:52.038627');
 INSERT INTO `django_session` VALUES ('wftlrvaen7k9k577mzu7zob16kc21k6d', 'Njg3ZTdlNTZlMTQ3ZDVjMDdhMzViZTA0NjEyN2U5YjhlYzFhOWMzNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhNGM5MTQ5NWM3MDUxNDQxNzQ2OWJmNzMwZGM2Y2ZiZGYzZmNiYTc3IiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJhcnRpY2xlIl0sIiJdfQ==', '2021-02-04 12:31:32.415934');
 
 -- ----------------------------
@@ -478,8 +487,8 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(15) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `nick_name` varchar(15) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `nick_name` varchar(30) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   `addtime` datetime(6) DEFAULT NULL,
   `is_start` tinyint(1) NOT NULL,
@@ -493,7 +502,7 @@ INSERT INTO `user` VALUES ('1', 'aaa', '123123', 'aaa啊', '349900176@q', 'user/
 INSERT INTO `user` VALUES ('2', 'dabo', '123123', '大波', '349900176@qq.co', 'user/upload/default4.jpg', '2021-01-23 17:19:42.331548', '1');
 INSERT INTO `user` VALUES ('26', null, '123123123', '我的中国心啊', '5666654646@sohu.com', '', '2021-01-25 16:41:31.798852', '0');
 INSERT INTO `user` VALUES ('27', null, '123123', '你打大宝贝呢', '349900176@qq.com', '', '2021-01-26 12:25:54.964141', '0');
-INSERT INTO `user` VALUES ('28', null, '4297f44b13955235245b2497399d7a93', '一个不能忘记的秘密', '94384738@qq.com', '', '2021-01-27 12:38:55.278686', '0');
+INSERT INTO `user` VALUES ('28', '94384738@qq.com', '4297f44b13955235245b2497399d7a93', '一个不能忘记的秘密', '94384738@qq.com', '', '2021-01-27 12:38:55.278686', '0');
 
 -- ----------------------------
 -- Table structure for `xadmin_bookmark`
